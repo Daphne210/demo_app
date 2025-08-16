@@ -135,12 +135,9 @@ class ProductBox extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text(
-                      this.name,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(this.description),
-                    Text("Price: " + this.price.toString()),
+                    Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(description),
+                    Text("Price: ${this.price}"),
                   ],
                 ),
               ),
