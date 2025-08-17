@@ -35,20 +35,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Product {
-  const Product({
-    required this.name,
-    required this.price,
-    required this.description,
-    required this.image,
-  });
-
-  final String name;
-  final String description;
-  final int price;
-  final String image;
-}
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -63,86 +49,36 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
 
-  final products = const <Product>[
-    Product(
-      name: "iPhone",
-      price: 3000,
-      description: "This is an iPhone",
-      image: "iphone.jpg",
-    ),
-    Product(
-      name: "Pixel",
-      price: 1500,
-      description: "This is a Google Pixel",
-      image: "iphone.jpg",
-    ),
-    Product(
-      name: "Galaxy Z",
-      price: 2400,
-      description: "This is a samsung",
-      image: "iphone.jpg",
-    ),
-  ];
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Message"),
+          content: Text("Opening dialog"),
+          actions: <Widget>[
+            FloatingActionButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Product Listing")),
-      body: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
-        itemCount: products.length,
-        itemBuilder: (context, i) {
-          final p = products[i];
-          return ProductBox(
-            name: p.name,
-            description: p.description,
-            price: p.price,
-            image: p.image,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class ProductBox extends StatelessWidget {
-  const ProductBox({
-    Key? key,
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.image,
-  }) : super(key: key);
-
-  final String name;
-  final String description;
-  final int price;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(2),
-      height: 120,
-      child: Card(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Image.asset("assets/$image"),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(description),
-                    Text("Price: ${this.price}"),
-                  ],
-                ),
-              ),
-            ),
-          ],
+      appBar: AppBar(title: Text("Gestures")),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            _showDialog(context);
+          },
+          child: Text('Hello World'),
         ),
       ),
     );
